@@ -15,7 +15,13 @@ app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "images")));
 
 // Enable CORS for all origins
-app.use(cors());
+const corsOptions = {
+    origin: ['https://blog-app-client-delta-azure.vercel.app'], // Replace with your Vercel frontend URL and local development URL
+    optionsSuccessStatus: 200 // Some legacy browsers choke on 204
+};
+
+app.use(cors(corsOptions));
+
 
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
